@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.prac01"
-        minSdk = 24
+        minSdk = 25
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -41,4 +41,3 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
-

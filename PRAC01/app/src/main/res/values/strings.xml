@@ -1,7 +1,3 @@
 <resources>
-    <string name="app_name">PRAC01</string>
-    <string name="START_NEW_ACTIVITY">Mở Activity Con</string>
-    <string name="result_text">Kết quả</string>
-
+    <string name="app_name">Prac01</string>
 </resources>
-

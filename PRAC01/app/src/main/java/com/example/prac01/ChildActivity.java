@@ -1,44 +1,53 @@
 package com.example.prac01;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 public class ChildActivity extends AppCompatActivity {
-    private EditText etFullName, etGPA;
+
+    private EditText etFirstName, etLastName, etGPA;
+    private Button btnSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child);
 
-        etFullName = findViewById(R.id.etFullName);
+        etFirstName = findViewById(R.id.etFirstName);
+        etLastName = findViewById(R.id.etLastName);
         etGPA = findViewById(R.id.etGPA);
-        Button btnSendBack = findViewById(R.id.btnSendBack);
+        btnSubmit = findViewById(R.id.btnSubmit);
 
-        //Xử lý sự kiện khi nhấn nút trả dữ liệu về activity cha
-        btnSendBack.setOnClickListener(v -> {
-//            @Override
-//            public void onClick(View v) {
-                //Lấy dữ liệu từ EditText
-                String FullName = etFullName.getText().toString();
-                double gpa = Double.parseDouble(etGPA.getText().toString());
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String firstName = etFirstName.getText().toString().trim();
+                String lastName = etLastName.getText().toString().trim();
+                String gpaStr = etGPA.getText().toString().trim();
+                double gpa = 0.0;
 
-                //Tạo Intent để trả về dữ liệu
+                if(!gpaStr.isEmpty()){
+                    try {
+                        gpa = Double.parseDouble(gpaStr);
+                    } catch (NumberFormatException e){
+                        e.printStackTrace();
+                        // Xử lý nếu nhập sai định dạng số
+                    }
+                }
+
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("Ho va ten", FullName);
+                resultIntent.putExtra("firstName", firstName);
+                resultIntent.putExtra("lastName", lastName);
                 resultIntent.putExtra("gpa", gpa);
 
-
-                //Trả về dữ liệu
                 setResult(RESULT_OK, resultIntent);
-
-                //Kết thúc Activity con
                 finish();
-//            }
+            }
         });
     }
 }
